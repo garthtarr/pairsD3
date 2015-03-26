@@ -1,0 +1,63 @@
+<style>
+
+body { font: 14px Arial;}
+
+svg {
+    font: 14px Arial;
+    padding: 10px;
+}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+    stroke-width: 1px;
+}
+
+.axis path {
+  display: none;
+}
+
+rect.extent {
+  fill: #000;
+    fill-opacity: .125;
+  stroke: #fff;
+}
+
+rect.frame {
+  fill: #fff;
+    fill-opacity: .7;
+  stroke: #aaa;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .7;
+}
+
+circle.greyed {
+  fill: #ccc !important;
+}
+
+.extent {
+  fill: #000;
+    fill-opacity: .125;
+  stroke: #fff;
+}
+
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+  font: 14px Arial;
+}
+</style>
