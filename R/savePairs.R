@@ -4,7 +4,7 @@
 #' include it's dependencies in an adjacent directory or can bundle all
 #' dependencies into the HTML file (via base64 encoding).
 #'
-#' @param pairs Network to save (e.g. result of calling the function
+#' @param pairs plot to save (e.g. result of calling the function
 #'   \code{pairsD3}).
 #'
 #' @inheritParams htmlwidgets::saveWidget

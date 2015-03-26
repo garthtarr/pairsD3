@@ -24,7 +24,7 @@ require(pairsD3)
 pairsD3(iris[,1:4],group=iris[,5])
 ```
 
-### Save
+#### Save
 
 Use `savePairs` to save a pairs plot as a stand alone HTML file:
 
@@ -32,3 +32,8 @@ Use `savePairs` to save a pairs plot as a stand alone HTML file:
 library(magrittr)
 pairsD3(iris[,1:4],group=iris[,5]) %>% savePairs(file = 'iris.html')
 ```
+
+#### Shiny
+
+
+#### Rmarkdown
