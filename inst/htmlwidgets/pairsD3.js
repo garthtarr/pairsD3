@@ -5,8 +5,11 @@ HTMLWidgets.widget({
   type: 'output',
 
   initialize: function(el, width, height) {
+
     return {};
   },
+
+
 
   renderValue: function(el, xin, instance) {
     // save params for reference from resize method
@@ -97,12 +100,13 @@ var brushCell;
 
 // Clear the previously-active brush, if any.
 function brushstart(p) {
-if (brushCell !== this) {
-d3.select(brushCell).call(brush.clear());
-x.domain(domainByTrait[p.x]);
-y.domain(domainByTrait[p.y]);
-brushCell = this;
-}
+  if (brushCell !== this) {
+    d3.select(brushCell).call(brush.clear());
+    x.domain(domainByTrait[p.x]);
+    y.domain(domainByTrait[p.y]);
+    brushCell = this;
+  }
+
 }
 
     // Highlight the selected circles.
@@ -118,17 +122,27 @@ brushCell = this;
 //  if (brush.empty()) svg.selectAll(".greyed").classed("greyed", false);
 // }
 
-    // If the brush is empty, select all circles.
+
     function brushend() {
+      // If the brush is empty, select all circles.
       if (brush.empty()){
         svg.selectAll(".greyed").classed("greyed", false);
       }
-      var circleStates = d3.select('svg')
-                          .select('g')
-                          .selectAll('circle')[0]
-                          .map(function(d) {return d.className['baseVal']});
-      //Shiny.onInputChange("mydata", circleStates);
-    }
+  if(typeof Shiny !== 'undefined'){
+  var circleS = [];
+        var number = [];
+        for(i = 0; i < 6; i++) {
+        number[i] = Math.floor( Math.random() * 60 );}
+        Shiny.onInputChange("mynumber", number);
+var circleS = svg
+.selectAll('circle')[0]
+//.length
+.map(function(d) {return d.className['baseVal']});
+Shiny.onInputChange("mydata", circleS);
+      }
+}
+
+
 
 
     // X-axis.
@@ -233,3 +247,5 @@ function plot(p) {
   }
 
 });
+
+

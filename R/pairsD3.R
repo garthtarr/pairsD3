@@ -8,8 +8,8 @@
 pairsD3 <- function(x, group=NULL, width = NULL, height = NULL, cols=NULL, big=FALSE) {
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
-  if(dim(data)[2]>=10 | dim(data)[1]>500){
-    warning("If you are sure you want that many variables plottes, set big=TRUE")
+  if(!big & dim(data)[2]>=10){
+    warning("If you are sure you want that many variables plotted, set big=TRUE")
     return(NULL)
   }
   if(is.null(group)){
