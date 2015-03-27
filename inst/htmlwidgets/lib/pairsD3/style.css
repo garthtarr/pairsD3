@@ -1,6 +1,10 @@
 <style>
 
-body { font: 14px Arial;}
+body {
+  font: 14px Arial;
+  padding: 10px;
+  margin: 10px;
+}
 
 svg {
     font: 14px Arial;

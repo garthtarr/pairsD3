@@ -5,15 +5,18 @@
 #' @import htmlwidgets
 #'
 #' @export
-pairsD3 <- function(x, group=NULL, width = NULL, height = NULL, cols=NULL, big=FALSE) {
+pairsD3 <- function(x, group=NULL, width = NULL, cols=NULL, big=FALSE) {
+  height=width
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
+  n = dim(data)[1]
+  p = dim(data)[2]
   if(!big & dim(data)[2]>=10){
     warning("If you are sure you want that many variables plotted, set big=TRUE")
     return(NULL)
   }
   if(is.null(group)){
-    group = rep(1,dim(data)[1])
+    group = rep(1,n)
   }
   groupval = as.numeric(factor(group))
   alldata = cbind(data,groupval,group)
@@ -34,6 +37,8 @@ pairsD3 <- function(x, group=NULL, width = NULL, height = NULL, cols=NULL, big=F
     data = data,
     group = group,
     alldata = alldata,
+    n = n,
+    p = p,
     legdata = legdata,
     settings = settings
   )

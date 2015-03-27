@@ -1,15 +1,9 @@
 HTMLWidgets.widget({
-
   name: 'pairsD3',
-
   type: 'output',
-
   initialize: function(el, width, height) {
-
     return {};
   },
-
-
 
   renderValue: function(el, xin, instance) {
     // save params for reference from resize method
@@ -39,18 +33,15 @@ HTMLWidgets.widget({
                   );
     });
 
-
     // get the width and height
-    var width = el.offsetWidth;
-    var height = el.offsetHeight;
+    //var width = el.offsetWidth;
+    //var height = el.offsetHeight;
     // var width = 960;
-    var size = 150;
-    var padding = 15;
-    color = xin.settings.cols
-    //var color = d3.scale.linear()
-    //            .domain([1,3])
-    //            .range(["red","blue","yellow"]);
-    //d3.scale.category10();
+    // var size = 150;
+    var padding = 10;
+    var size = (d3.min([width,height])-2*padding)/p
+    var color = xin.settings.cols
+    // var color = d3.scale.category10();
     // var color = eval(settings.colourScale);
 
     var x = d3.scale.linear()
@@ -62,17 +53,15 @@ HTMLWidgets.widget({
     var xAxis = d3.svg.axis()
                 .scale(x)
                 .orient("bottom")
-                .ticks(4);
+                .ticks(3);
 
     var yAxis = d3.svg.axis()
                 .scale(y)
                 .orient("left")
-                .ticks(4);
+                .ticks(3);
 
     // add the tooltip area to the webpage
     var tooltip = d3.select(el).append("div")
-          //.attr("width", size * p + padding*4)
-          //.attr("height", size * p + padding*4)
           .attr("class", "tooltip")
           .style("opacity", 0);
 
@@ -82,11 +71,8 @@ HTMLWidgets.widget({
           .append("g")
           .attr("transform", "translate(" + padding*2 + "," + padding / 2 + ")");
 
-
-
     xAxis.tickSize(size * p);
     yAxis.tickSize(-size * p);
-
 
     var brush = d3.svg.brush()
                 .x(x)
@@ -96,20 +82,19 @@ HTMLWidgets.widget({
                 .on("brushend", brushend);
 
 
-var brushCell;
+    var brushCell;
 
-// Clear the previously-active brush, if any.
-function brushstart(p) {
-  if (brushCell !== this) {
-    d3.select(brushCell).call(brush.clear());
-    x.domain(domainByTrait[p.x]);
-    y.domain(domainByTrait[p.y]);
-    brushCell = this;
-  }
+    // Clear the previously-active brush, if any
+    function brushstart(p) {
+      if (brushCell !== this) {
+        d3.select(brushCell).call(brush.clear());
+        x.domain(domainByTrait[p.x]);
+        y.domain(domainByTrait[p.y]);
+        brushCell = this;
+      }
+    }
 
-}
-
-    // Highlight the selected circles.
+    // Highlight the selected circles
     function brushmove(p) {
       var e = brush.extent();
       svg.selectAll("circle").classed("greyed",
@@ -117,35 +102,21 @@ function brushstart(p) {
         });
     }
 
-// If the brush is empty, select all circles.
-// function brushend() {
-//  if (brush.empty()) svg.selectAll(".greyed").classed("greyed", false);
-// }
-
-
     function brushend() {
       // If the brush is empty, select all circles.
       if (brush.empty()){
         svg.selectAll(".greyed").classed("greyed", false);
       }
-  if(typeof Shiny !== 'undefined'){
-  var circleS = [];
-        var number = [];
-        for(i = 0; i < 6; i++) {
-        number[i] = Math.floor( Math.random() * 60 );}
-        Shiny.onInputChange("mynumber", number);
-var circleS = svg
-.selectAll('circle')[0]
-//.length
-.map(function(d) {return d.className['baseVal']});
-Shiny.onInputChange("mydata", circleS);
+      // Identify selected observations and pass them to Shiny as
+      // input$selectedobs
+      if(typeof Shiny !== 'undefined'){
+        var circleS = svg.selectAll('circle')[0]
+                        .map(function(d) {return d.className['baseVal']});
+        Shiny.onInputChange("selectedobs", circleS);
       }
-}
+    }
 
-
-
-
-    // X-axis.
+    // X-axis
     svg.selectAll(".x.axis")
         .data(traits)
         .enter().append("g")
@@ -155,7 +126,7 @@ Shiny.onInputChange("mydata", circleS);
         .each(function(d) { x.domain(domainByTrait[d]);
                             d3.select(this).call(xAxis); });
 
-    // Y-axis.
+    // Y-axis
     svg.selectAll(".y.axis")
         .data(traits)
         .enter().append("g")
@@ -164,8 +135,7 @@ Shiny.onInputChange("mydata", circleS);
               function(d, i) { return "translate(0," + i * size + ")"; })
         .each(function(d) { y.domain(domainByTrait[d]);
                             d3.select(this).call(yAxis); });
-
-    // Cell and plot.
+    // Cell and plot
     var cell = svg.selectAll(".cell")
               .data(cross(traits, traits))
               .enter().append("g")
@@ -175,77 +145,67 @@ Shiny.onInputChange("mydata", circleS);
                       return "translate(" + d.i * size + "," + d.j * size + ")";
                     })
               .each(plot);
+    // Titles for the diagonal.
+    cell.filter(function(d) { return d.i === d.j; }).append("text")
+      .attr("x", size/2)
+      .attr("y", size/2)
+      .text(function(d) { return d.x; }).style("text-anchor", "middle");
 
-//cell.call(brush);
-
-// Titles for the diagonal.
-cell.filter(function(d) { return d.i === d.j; }).append("text")
-    .attr("x", size/2)
-    .attr("y", size/2)
-    .text(function(d) { return d.x; }).style("text-anchor", "middle");
-
-
-function plot(p) {
-  var cell = d3.select(this);
-
-  x.domain(domainByTrait[p.x]);
-  y.domain(domainByTrait[p.y]);
-
-  // Plot frame
-  cell.append("rect")
-  .attr("class", "frame")
-  .attr("x", padding / 2)
-  .attr("y", padding / 2)
-  .attr("width", size - padding)
-  .attr("height", size - padding);
-
-  // apply the brush needs to be done before tooltip
-  cell.call(brush)
-
-    // plot the data
-    if (p.x !== p.y){ // prevents a main diagonal being plotted
-      cell.selectAll("circle")
-      .data(alldata)
-      .enter().append("circle")
-      .attr("cx", function(d) {  return x(d[p.x]); })
-      .attr("cy", function(d) { return y(d[p.y]); })
-      .attr("r", 3)
-      // this tries to color by a factor variable
-      // called factorvar -- not yet implemented
-      // if/when implemented it would need a factor legend
-      //.style("fill", function(d) { return color(d.groupval); });
-      .style("fill", function(d) { return color[d.groupval]; })
-      .on("mouseover", function(d) {
-          tooltip.transition()
-               .duration(200)
-               .style("opacity", .9);
-          tooltip.html(d.group)// + "<br/> (" + xValue(d)
-	        //+ ", " + yValue(d) + ")")
-               .style("left", (d3.event.pageX + 1) + "px")
-               .style("top", (d3.event.pageY -10) + "px");
-      })
-      .on("mouseout", function(d) {
-          tooltip.transition()
-               .duration(500)
-               .style("opacity", 0);
-      });
+    // plot function
+    function plot(p) {
+      var cell = d3.select(this);
+      x.domain(domainByTrait[p.x]);
+      y.domain(domainByTrait[p.y]);
+      // Plot frame
+      cell.append("rect")
+        .attr("class", "frame")
+        .attr("x", padding / 2)
+        .attr("y", padding / 2)
+        .attr("width", size - padding)
+        .attr("height", size - padding);
+      // apply the brush needs to be done before tooltip
+      cell.call(brush)
+      // plot the data
+      if (p.x !== p.y){ // prevents a main diagonal being plotted
+        cell.selectAll("circle")
+          .data(alldata)
+          .enter().append("circle")
+          .attr("cx", function(d) {  return x(d[p.x]); })
+          .attr("cy", function(d) { return y(d[p.y]); })
+          .attr("r", 3)
+          .style("fill", function(d) { return color[d.groupval]; })
+          .on("mouseover", function(d) {
+            tooltip.transition()
+              .duration(200)
+              .style("opacity", .9);
+            tooltip.html(d.group)// + "<br/> (" + xValue(d) + ", " + yValue(d) + ")")
+              .style("left", (d3.event.pageX + 1) + "px")
+              .style("top", (d3.event.pageY - 10) + "px");
+          })
+          .on("mouseout", function(d) {
+            tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+          });
+      }
     }
-}
-
-
+    // cross function
     function cross(a, b) {
       var c = [], n = a.length, m = b.length, i, j;
-      for (i = -1; ++i < n;) for (j = -1; ++j < m;) c.push({x: a[i], i: i, y: b[j], j: j});
+      for (i = -1; ++i < n;) {
+        for (j = -1; ++j < m;) {
+          c.push({x: a[i], i: i, y: b[j], j: j})
+        }
+      };
       return c;
     }
-
-
   },
 
   resize: function(el, width, height, instance) {
-
+    if(instance.xin){
+      this.drawGraphic(el, instance.xin, width, height);
+    }
   }
-
 });
 
 
