@@ -2,10 +2,37 @@
 #'
 #' An interactive matrix of scatterplots is produced.
 #'
+#' @param x the coordinates of points given as numeric columns of a
+#'   matrix or data frame. Logical and factor columns are converted
+#'   to numeric in the same way that \code{data.matrix} does.
+#' @param group a optional vector specifying the group each observation
+#'   belongs to.  Used for tooltips and colouring the observations.
+#' @param subset an optional vector specifying a subset of observations
+#'   to be used for plotting. Useful when you have a large number of
+#'   observations, you can specify a random subset.
+#' @param labels the names of the variables (column names of \code{x}
+#'   used by default).
+#' @param col an optional (hex) colour for each of the levels in the group
+#'   vector.
+#' @param big a logical parameter.  Prevents inadvertent plotting of huge
+#'   data sets.  Default limit is 10 variables, to plot more than 10 set
+#'   \code{big=TRUE}.
+#' @param theme a character parameter specifying whether the theme should
+#'   be colour \code{colour} (default) or black and white \code{bw}.
+#' @param width the width (and height) of the plot when viewed externally.
+#'
 #' @import htmlwidgets
 #'
+#' @examples
+#' data(iris)
+#' \dontrun{
+#' pairsD3(iris[,1:4],group=iris[,5],
+#'          labels=c("Sepal Length","Sepal Width","Petal Width", "Species"))
+#' }
+#'
 #' @export
-pairsD3 <- function(x, group=NULL, width = NULL, cols=NULL, big=FALSE) {
+pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL,
+                    width = NULL, col=NULL, big=FALSE, theme="colour") {
   height=width
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
@@ -15,22 +42,34 @@ pairsD3 <- function(x, group=NULL, width = NULL, cols=NULL, big=FALSE) {
     warning("If you are sure you want that many variables plotted, set big=TRUE")
     return(NULL)
   }
+  if(is.null(labels)){
+    labels=names(data)
+  }
   if(is.null(group)){
-    group = rep(1,n)
+    group = rep("",n)
   }
-  groupval = as.numeric(factor(group))
+  n.group = length(levels(factor(group)))
+  groupval = as.numeric(factor(group))-1
   alldata = cbind(data,groupval,group)
-  if(length(cols)<length(levels(factor(group)))){
-    require(RColorBrewer)
-    n.groups = max(3,length(levels(factor(group))))
-    cols = brewer.pal(n.groups,name = "Set1")
+  if(is.null(col)){
+    if(is.element(theme,c("colour","color"))){
+      # Set1 from brewer.pal() in the RColorBrewer package
+      col=c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00",
+            "#FFFF33", "#A65628", "#F781BF", "#999999")[1:n.group]
+    } else if(theme=="bw"){
+      col=gray.colors(n.group,start=0,end=0.75)
+    }
   }
-  legdata = data.frame(levels = levels(factor(group)),cols=cols)
+  if(length(col)>n.group){
+    warning("The length of col should be the same as the number of levels in
+             the groups vector.")
+    col = unique(col)
+  }
   # create a list that contains the settings
   settings <- list(
     width = width,
     height = height,
-    cols = cols
+    col = col
   )
   # pass the data and settings using 'xin'
   xin <- list(
@@ -39,14 +78,13 @@ pairsD3 <- function(x, group=NULL, width = NULL, cols=NULL, big=FALSE) {
     alldata = alldata,
     n = n,
     p = p,
-    legdata = legdata,
+    labels = labels,
     settings = settings
   )
-
   # create widget
   htmlwidgets::createWidget(
     name = 'pairsD3',
-    xin,
+    x = xin,
     width = width,
     height = height,
     package = 'pairsD3'

@@ -19,11 +19,11 @@ HTMLWidgets.widget({
 
     wide = HTMLWidgets.dataframeToD3(xin.data);
     factor = xin.groupval;
-    console.log(xin);
+    //console.log(xin);
     alldata = HTMLWidgets.dataframeToD3(xin.alldata);
     legdata = HTMLWidgets.dataframeToD3(xin.legdata);
 
-    domainByTrait = {}; // ?
+    domainByTrait = {}; //
     traits = d3.keys(wide[0]); // column names
     p = traits.length; // number of variables
 
@@ -38,11 +38,16 @@ HTMLWidgets.widget({
     //var height = el.offsetHeight;
     // var width = 960;
     // var size = 150;
+    var xinlab = xin.labels;
     var padding = 10;
-    var size = (d3.min([width,height])-2*padding)/p
-    var color = xin.settings.cols
+    var size = (d3.min([width,height])-2*padding)/p;
+    var color = [];
+    if(xin.settings.col.constructor===Array){
+      color = xin.settings.col;
+    } else {
+      color = [xin.settings.col];
+    }
     // var color = d3.scale.category10();
-    // var color = eval(settings.colourScale);
 
     var x = d3.scale.linear()
             .range([padding / 2, size - padding / 2]);
@@ -80,7 +85,6 @@ HTMLWidgets.widget({
                 .on("brushstart", brushstart)
                 .on("brush", brushmove)
                 .on("brushend", brushend);
-
 
     var brushCell;
 
@@ -136,7 +140,7 @@ HTMLWidgets.widget({
         .each(function(d) { y.domain(domainByTrait[d]);
                             d3.select(this).call(yAxis); });
     // Cell and plot
-    var cell = svg.selectAll(".cell")
+    cell = svg.selectAll(".cell")
               .data(cross(traits, traits))
               .enter().append("g")
               .attr("class", "cell")
@@ -146,10 +150,10 @@ HTMLWidgets.widget({
                     })
               .each(plot);
     // Titles for the diagonal.
-    cell.filter(function(d) { return d.i === d.j; }).append("text")
+    cell.filter(function(d) { return d.i === d.j; }).append('text')
       .attr("x", size/2)
       .attr("y", size/2)
-      .text(function(d) { return d.x; }).style("text-anchor", "middle");
+      .text(function(d) { return xinlab[d.i]; }).style("text-anchor", "middle");
 
     // plot function
     function plot(p) {
