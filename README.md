@@ -35,7 +35,7 @@ pairsD3(iris[,1:4],group=iris[,5]) %>% savePairs(file = 'iris.html')
 
 #### Shiny
 
-An example can be found in the [`network` package](https://github.com/garthtarr/robnetwork).  A standalone example will be available soon.
+An example can be found in the [`robnetwork` package](https://github.com/garthtarr/robnetwork).  A standalone example will be available soon.
 
 #### Rmarkdown
 
