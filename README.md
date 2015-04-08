@@ -8,7 +8,13 @@ You could also consider the [pairedVis()](https://healthvis.wordpress.com/2013/0
 
 ## Installation
 
-You can install `pairsD3` from Github using the `devtools` package as follows:
+The `pairsD3` package is available on CRAN:
+
+```s
+install.packages("pairsD3")
+```
+
+Alternatively, you can install the development version of `pairsD3` from Github using the `devtools` package as follows:
 
 ```s
 devtools::install_github("garthtarr/pairsD3")
