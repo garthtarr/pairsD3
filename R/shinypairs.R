@@ -16,6 +16,11 @@
 #'
 #' @import shiny
 #'
+#' @examples
+#' \dontrun{
+#' shinypairs(iris)
+#' }
+#'
 #' @export
 shinypairs = function(x, group=NULL, subset=NULL, labels = NULL){
   calls = match.call()
