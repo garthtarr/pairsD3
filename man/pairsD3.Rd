@@ -4,8 +4,9 @@
 \alias{pairsD3}
 \title{D3 scatterplot matrices}
 \usage{
-pairsD3(x, group = NULL, subset = NULL, labels = NULL, width = NULL,
-  col = NULL, big = FALSE, theme = "colour")
+pairsD3(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
+  width = NULL, col = NULL, big = FALSE, theme = "colour",
+  opacity = 0.9)
 }
 \arguments{
 \item{x}{the coordinates of points given as numeric columns of a
@@ -22,6 +23,8 @@ observations, you can specify a random subset.}
 \item{labels}{the names of the variables (column names of \code{x}
 used by default).}
 
+\item{cex}{the magnification of the plotting symbol (default=3)}
+
 \item{width}{the width (and height) of the plot when viewed externally.}
 
 \item{col}{an optional (hex) colour for each of the levels in the group
@@ -33,6 +36,9 @@ data sets.  Default limit is 10 variables, to plot more than 10 set
 
 \item{theme}{a character parameter specifying whether the theme should
 be colour \code{colour} (default) or black and white \code{bw}.}
+
+\item{opacity}{numeric between 0 and 1. The opacity of the plotting
+  symbols (default 0.9).}
 }
 \description{
 An interactive matrix of scatterplots is produced.

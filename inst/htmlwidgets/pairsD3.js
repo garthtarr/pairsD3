@@ -176,8 +176,9 @@ HTMLWidgets.widget({
           .enter().append("circle")
           .attr("cx", function(d) {  return x(d[p.x]); })
           .attr("cy", function(d) { return y(d[p.y]); })
-          .attr("r", 3)
+          .attr("r", xin.settings.cex)
           .style("fill", function(d) { return color[d.groupval]; })
+          .style("opacity", xin.settings.opacity)
           .on("mouseover", function(d) {
             tooltip.transition()
               .duration(200)

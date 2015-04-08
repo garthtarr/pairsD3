@@ -12,6 +12,7 @@
 #'   observations, you can specify a random subset.
 #' @param labels the names of the variables (column names of \code{x}
 #'   used by default).
+#' @param cex the magnification of the plotting symbol (default=3)
 #' @param col an optional (hex) colour for each of the levels in the group
 #'   vector.
 #' @param big a logical parameter.  Prevents inadvertent plotting of huge
@@ -20,6 +21,8 @@
 #' @param theme a character parameter specifying whether the theme should
 #'   be colour \code{colour} (default) or black and white \code{bw}.
 #' @param width the width (and height) of the plot when viewed externally.
+#' @param opacity numeric between 0 and 1. The opacity of the plotting
+#'   symbols (default 0.9).
 #'
 #' @import htmlwidgets
 #'
@@ -31,8 +34,8 @@
 #' }
 #'
 #' @export
-pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL,
-                    width = NULL, col=NULL, big=FALSE, theme="colour") {
+pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
+                    width = NULL, col=NULL, big=FALSE, theme="colour", opacity = 0.9) {
   height=width
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
@@ -56,6 +59,9 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL,
       # Set1 from brewer.pal() in the RColorBrewer package
       col=c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00",
             "#FFFF33", "#A65628", "#F781BF", "#999999")[1:n.group]
+      while(any(is.na(col))){
+        col[is.na(col)] = col[1:sum(is.na(col))] # repeat colours
+      }
     } else if(theme=="bw"){
       col=gray.colors(n.group,start=0,end=0.75)
     }
@@ -69,7 +75,9 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL,
   settings <- list(
     width = width,
     height = height,
-    col = col
+    col = col,
+    cex = cex,
+    opacity = opacity
   )
   # pass the data and settings using 'xin'
   xin <- list(
@@ -93,12 +101,20 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL,
 
 #' Widget output function for use in Shiny
 #'
+#' @param outputId Shiny output ID
+#' @param width width default '100\%'
+#' @param height height default '400px'
+#'
 #' @export
 pairsD3Output <- function(outputId, width = '100%', height = '400px'){
   shinyWidgetOutput(outputId, 'pairsD3', width, height, package = 'pairsD3')
 }
 
 #' Widget render function for use in Shiny
+#'
+#' @param expr pairsD3 expression
+#' @param env environment
+#' @param quoted logical, default = FALSE
 #'
 #' @export
 renderPairsD3 <- function(expr, env = parent.frame(), quoted = FALSE) {

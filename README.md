@@ -1,6 +1,6 @@
 # D3 scatterplot matrices
 
-Version 0.0.1
+Version 0.0.5
 
 This is a port of Mike Bostock's [D3 scatter plot matrix](http://bl.ocks.org/mbostock/4063663) code to the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) framework.  There have been some minor adjustments, including the addition of tooltips.
 
@@ -35,7 +35,11 @@ pairsD3(iris[,1:4],group=iris[,5]) %>% savePairs(file = 'iris.html')
 
 #### Shiny
 
-An example can be found in the [`robnetwork` package](https://github.com/garthtarr/robnetwork).  A standalone example will be available soon.
+You can view an interactive scatterplot matrix using the `shinypairs` function:
+
+```s
+shinypairs(iris)
+```
 
 #### Rmarkdown
 
