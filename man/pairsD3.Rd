@@ -47,7 +47,7 @@ An interactive matrix of scatterplots is produced.
 data(iris)
 \dontrun{
 pairsD3(iris[,1:4],group=iris[,5],
-         labels=c("Sepal Length","Sepal Width","Petal Width", "Species"))
+         labels=gsub(pattern = "\\\\.",replacement = " ", names(iris)))
 }
 }
 

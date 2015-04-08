@@ -2,7 +2,6 @@
 #'
 #' Opens a shiny GUI to facilitate interaction with the pairsD3 function
 #'
-#'
 #' @param x the coordinates of points given as numeric columns of a
 #'   matrix or data frame. Logical and factor columns are converted
 #'   to numeric in the same way that \code{data.matrix} does.
@@ -17,6 +16,7 @@
 #' @import shiny
 #'
 #' @examples
+#' data(iris)
 #' \dontrun{
 #' shinypairs(iris)
 #' }

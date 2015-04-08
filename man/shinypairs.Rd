@@ -24,4 +24,10 @@ observations, you can specify a random subset.}
 \description{
 Opens a shiny GUI to facilitate interaction with the pairsD3 function
 }
+\examples{
+data(iris)
+\dontrun{
+shinypairs(iris)
+}
+}
 
