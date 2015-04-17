@@ -29,8 +29,7 @@ HTMLWidgets.widget({
 
     traits.forEach(function(trait) {
       domainByTrait[trait] = d3.extent(wide,
-                  function(d) { return +d[trait]; }
-                  );
+                              function(d) { return d[trait]; });
     });
 
     // get the width and height
@@ -174,9 +173,10 @@ HTMLWidgets.widget({
         cell.selectAll("circle")
           .data(alldata)
           .enter().append("circle")
-          .attr("cx", function(d) {  return x(d[p.x]); })
+          .attr("cx", function(d) { return x(d[p.x]); })
           .attr("cy", function(d) { return y(d[p.y]); })
           .attr("r", xin.settings.cex)
+          .style("display", function(d) { return d[p.x]==null || d[p.y]==null ? "none" : null; })
           .style("fill", function(d) { return color[d.groupval]; })
           .style("opacity", xin.settings.opacity)
           .on("mouseover", function(d) {
