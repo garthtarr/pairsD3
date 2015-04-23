@@ -152,7 +152,8 @@ HTMLWidgets.widget({
     cell.filter(function(d) { return d.i === d.j; }).append('text')
       .attr("x", size/2)
       .attr("y", size/2)
-      .text(function(d) { return xinlab[d.i]; }).style("text-anchor", "middle");
+      .text(function(d) { return xinlab[d.i]; })
+      .style("text-anchor", "middle");
 
     // plot function
     function plot(p) {
@@ -183,7 +184,7 @@ HTMLWidgets.widget({
             tooltip.transition()
               .duration(200)
               .style("opacity", .9);
-            tooltip.html(d.group)// + "<br/> (" + xValue(d) + ", " + yValue(d) + ")")
+            tooltip.html(d.tooltip)// + "<br/> (" + xValue(d) + ", " + yValue(d) + ")")
               .style("left", (d3.event.pageX + 1) + "px")
               .style("top", (d3.event.pageY - 10) + "px");
           })

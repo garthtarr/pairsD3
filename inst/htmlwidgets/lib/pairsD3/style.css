@@ -57,8 +57,10 @@
 
 .pairsD3 .tooltip {
   position: absolute;
-  width: 200px;
-  height: 28px;
   pointer-events: none;
-  font: 14px Arial;
+  padding: 2px;
+  font: 14px sans-serif;
+  background: rgba(255, 255, 255, 0.9);
+  border: 0px;
+  border-radius: 5px;
 }

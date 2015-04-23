@@ -1,6 +1,6 @@
 # D3 Scatterplot Matrices
 
-Version 0.0.7
+Version 0.0.8
 
 This is a port of Mike Bostock's [D3 scatter plot matrix](http://bl.ocks.org/mbostock/4063663) code to the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) framework.  There have been some minor adjustments, including the addition of tooltips.
 
@@ -51,4 +51,23 @@ shinypairs(iris)
 
 #### Rmarkdown
 
-A standalone example will be available soon.
+You can include interactive scatterplot matrices in rmarkdown documents in the usual way:
+
+    ```{r}
+    require(pairsD3)
+    pairsD3(iris)
+    ```
+
+#### Slidify
+
+HTML widgets are not (yet) supported in slidify.  A workaround is to do save the widget as a webpage then include that webpage in slidify using an iframe:
+
+
+    ```{r, results='asis',echo=FALSE}
+    require(pairsD3)
+    pd3 = pairsD3(iris)
+    savePairs(pd3, 'pD3.html')
+    cat('<iframe src="pD3.html"> </iframe>')
+    ```
+
+
