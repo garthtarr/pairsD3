@@ -10,6 +10,8 @@ HTMLWidgets.widget({
     instance.xin = xin;
     // draw the graphic
     this.drawGraphic(el, xin, el.offsetWidth, el.offsetHeight);
+
+
   },
 
   drawGraphic: function(el, xin, width, height){
@@ -19,7 +21,6 @@ HTMLWidgets.widget({
 
     wide = HTMLWidgets.dataframeToD3(xin.data);
     factor = xin.groupval;
-    //console.log(xin);
     alldata = HTMLWidgets.dataframeToD3(xin.alldata);
     legdata = HTMLWidgets.dataframeToD3(xin.legdata);
 
@@ -39,14 +40,13 @@ HTMLWidgets.widget({
     // var size = 150;
     var xinlab = xin.labels;
     var padding = 10;
-    var size = (d3.min([width,height])-2*padding)/p;
+    var size = (d3.min([width,height])-2*padding)/p-4;
     var color = [];
     if(xin.settings.col.constructor===Array){
       color = xin.settings.col;
     } else {
       color = [xin.settings.col];
     }
-    // var color = d3.scale.category10();
 
     var x = d3.scale.linear()
             .range([padding / 2, size - padding / 2]);
@@ -70,8 +70,8 @@ HTMLWidgets.widget({
           .style("opacity", 0);
 
     svg = d3.select(el).append("svg")
-          .attr("width", size * p + padding*4)
-          .attr("height", size * p + padding*4)
+          .attr("width", size * p + padding*2)
+          .attr("height", size * p + padding*2)
           .append("g")
           .attr("transform", "translate(" + padding*2 + "," + padding / 2 + ")");
 
@@ -185,8 +185,8 @@ HTMLWidgets.widget({
               .duration(200)
               .style("opacity", .9);
             tooltip.html(d.tooltip)// + "<br/> (" + xValue(d) + ", " + yValue(d) + ")")
-              .style("left", (d3.event.pageX + 1) + "px")
-              .style("top", (d3.event.pageY - 10) + "px");
+              .style("left", (event.pageX + 1) + "px")
+              .style("top", (event.pageY - 20) + "px");
           })
           .on("mouseout", function(d) {
             tooltip.transition()
@@ -205,6 +205,7 @@ HTMLWidgets.widget({
       };
       return c;
     }
+
   },
 
   resize: function(el, width, height, instance) {

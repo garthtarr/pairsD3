@@ -108,6 +108,7 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
     x = xin,
     width = width,
     height = height,
+    htmlwidgets::sizingPolicy(padding = 0, browser.fill = TRUE),
     package = 'pairsD3'
   )
 }
