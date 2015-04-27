@@ -1,6 +1,6 @@
 # D3 Scatterplot Matrices
 
-Version 0.0.8
+Version 0.1.0
 
 This is a port of Mike Bostock's [D3 scatter plot matrix](http://bl.ocks.org/mbostock/4063663) code to the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) framework.  There have been some minor adjustments, including the addition of tooltips.
 

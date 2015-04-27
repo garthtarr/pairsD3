@@ -6,7 +6,7 @@
 \usage{
 pairsD3(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
   width = NULL, col = NULL, big = FALSE, theme = "colour",
-  opacity = 0.9, tooltip = NULL)
+  opacity = 0.9, tooltip = NULL, leftmar = 35, topmar = 2)
 }
 \arguments{
 \item{x}{the coordinates of points given as numeric columns of a
@@ -41,7 +41,11 @@ be colour \code{colour} (default) or black and white \code{bw}.}
 symbols (default 0.9).}
 
 \item{tooltip}{an optional vector with the tool tip to be displayed when
-  hovering over an observation. You can include basic html.}
+hovering over an observation. You can include basic html.}
+
+\item{leftmar}{space on the left margin}
+
+\item{topmar}{space on the bottom margin}
 }
 \description{
 An interactive matrix of scatterplots is produced.
