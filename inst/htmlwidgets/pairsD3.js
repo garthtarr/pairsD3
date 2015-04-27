@@ -40,7 +40,7 @@ HTMLWidgets.widget({
     // var size = 150;
     var xinlab = xin.labels;
     var padding = 10;
-    var size = (d3.min([width,height])-2*padding)/p-2;
+    var size = (d3.min([width,height])-2*padding)/p-4;
     var color = [];
     if(xin.settings.col.constructor===Array){
       color = xin.settings.col;
@@ -73,7 +73,7 @@ HTMLWidgets.widget({
           .attr("width", size * p + padding*2)
           .attr("height", size * p + padding*2)
           .append("g")
-          .attr("transform", "translate(" + padding*2 + "," + padding / 2 + ")");
+          .attr("transform", "translate(" + xin.leftmar + "," + xin.topmar + ")");
 
     xAxis.tickSize(size * p);
     yAxis.tickSize(-size * p);
@@ -155,6 +155,15 @@ HTMLWidgets.widget({
       .text(function(d) { return xinlab[d.i]; })
       .style("text-anchor", "middle");
 
+    // tooltip fn
+    if(typeof Shiny !== 'undefined'){
+        leftoffset = document.getElementById("pairsplot").offsetParent.offsetLeft
+        topoffset = document.getElementById("pairsplot").offsetParent.offsetTop
+    } else {
+        leftoffset = 0
+        topoffset = 0
+    }
+
     // plot function
     function plot(p) {
       var cell = d3.select(this);
@@ -186,8 +195,8 @@ HTMLWidgets.widget({
               .style("opacity", .9);
             tooltip.html(d.tooltip)// + "<br/> (" + xValue(d) + ", " + yValue(d) + ")")
               //.placement("right")
-              .style("left", (event.pageX + 1) + "px")
-              .style("top", (event.pageY - 20) + "px");
+              .style("left", (event.pageX - leftoffset + 1) + "px")
+              .style("top", (event.pageY - topoffset - 20) + "px");
           })
           .on("mouseout", function(d) {
             tooltip.transition()
@@ -196,6 +205,8 @@ HTMLWidgets.widget({
           });
       }
     }
+
+
     // cross function
     function cross(a, b) {
       var c = [], n = a.length, m = b.length, i, j;

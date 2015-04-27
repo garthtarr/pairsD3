@@ -25,6 +25,8 @@
 #'   symbols (default 0.9).
 #' @param tooltip an optional vector with the tool tip to be displayed when
 #'   hovering over an observation. You can include basic html.
+#' @param leftmar space on the left margin
+#' @param topmar space on the bottom margin
 #'
 #' @import htmlwidgets
 #'
@@ -38,7 +40,7 @@
 #' @export
 pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
                     width = NULL, col=NULL, big=FALSE, theme="colour", opacity = 0.9,
-                    tooltip = NULL) {
+                    tooltip = NULL,leftmar = 35,topmar=2) {
   height=width
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
@@ -100,7 +102,9 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
     n = n,
     p = p,
     labels = labels,
-    settings = settings
+    settings = settings,
+    leftmar = leftmar,
+    topmar = topmar
   )
   # create widget
   htmlwidgets::createWidget(
