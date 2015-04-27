@@ -1,0 +1,19 @@
+Version 0.1.0
+-------------
+
+* Specify d3 as a dependency and move it to its own folder.
+  This is to ensure that d3 is picked up only once on a page,
+  when multiple d3 based charts are used on a page. Thanks to
+  Ramnath Vaidyanathan for this fix.
+* Namespace styles so that they are applied only to pairsD3 charts.
+  Thanks to Ramnath Vaidyanathan for this fix.
+* Better handling of NA and NaN values.  These are now dealt with
+  on a pairwise basis.
+* Updated tooltip to show row number (name) and (optionally) the
+  group an observation belongs to.
+* Improved the padding defaults and sizing.
+
+Version 0.0.6
+-------------
+
+* First CRAN release of pairsD3 package

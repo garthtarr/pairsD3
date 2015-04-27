@@ -4,7 +4,7 @@
 \alias{pairsD3Output}
 \title{Widget output function for use in Shiny}
 \usage{
-pairsD3Output(outputId, width = "100\%", height = "400px")
+pairsD3Output(outputId, width = "100\%", height = "100\%")
 }
 \arguments{
 \item{outputId}{Shiny output ID}

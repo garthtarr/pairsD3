@@ -1,6 +1,6 @@
 Package: pairsD3
 Title: D3 Scatterplot Matrices
-Version: 0.0.8
+Version: 0.1.0
 Authors@R: person("Garth", "Tarr", , "garth.tarr@gmail.com", role = c("aut", "cre"))
 Description: Creates an interactive scatterplot matrix using the D3 JavaScript library. See <http://d3js.org/> for more information on D3.
 Depends: R (>= 3.1.2)
