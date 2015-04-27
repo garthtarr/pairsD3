@@ -35,12 +35,12 @@ HTMLWidgets.widget({
 
     // get the width and height
     //var width = el.offsetWidth;
-    //var height = el.offsetHeight;
+    //var height = el.offsetHeight0
     // var width = 960;
     // var size = 150;
     var xinlab = xin.labels;
     var padding = 10;
-    var size = (d3.min([width,height])-2*padding)/p-4;
+    var size = (d3.min([width,height])-2*padding)/p-2;
     var color = [];
     if(xin.settings.col.constructor===Array){
       color = xin.settings.col;
@@ -185,6 +185,7 @@ HTMLWidgets.widget({
               .duration(200)
               .style("opacity", .9);
             tooltip.html(d.tooltip)// + "<br/> (" + xValue(d) + ", " + yValue(d) + ")")
+              //.placement("right")
               .style("left", (event.pageX + 1) + "px")
               .style("top", (event.pageY - 20) + "px");
           })

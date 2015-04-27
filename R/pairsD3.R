@@ -120,7 +120,7 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
 #' @param height height default '400px'
 #'
 #' @export
-pairsD3Output <- function(outputId, width = '100%', height = '400px'){
+pairsD3Output <- function(outputId, width = '100%', height = '100%'){
   shinyWidgetOutput(outputId, 'pairsD3', width, height, package = 'pairsD3')
 }
 

@@ -6,7 +6,8 @@
 
 .pairsD3 svg {
     font: 14px Arial;
-    padding: 10px;
+    padding: 0px;
+    overflow:visible;
 }
 
 .pairsD3 .axis,
