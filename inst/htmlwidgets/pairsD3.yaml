@@ -4,6 +4,6 @@ dependencies:
     src: htmlwidgets/lib/d3
     script: d3.v3.min.js
   - name: pairsD3
-    version: 0.0.1
+    version: 0.1.1
     src: htmlwidgets/lib/pairsD3
     stylesheet: style.css
