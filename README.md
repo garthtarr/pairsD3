@@ -1,6 +1,6 @@
 # D3 Scatterplot Matrices
 
-[![Travis-CI Build Status](https://travis-ci.org/garthtarr/pairsD3.svg?branch=master)](https://travis-ci.org/garthtarr/pairsD3)
+[![Travis-CI Build Status](https://travis-ci.org/garthtarr/pairsD3.svg?branch=master)](https://travis-ci.org/garthtarr/pairsD3) [![](http://cranlogs.r-pkg.org/badges/pairsD3)](http://cran.rstudio.com/web/packages/pairsD3/index.html)
 
 This is a port of Mike Bostock's [D3 scatter plot matrix](http://bl.ocks.org/mbostock/4063663) code to the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) framework.  There have been some minor adjustments, including the addition of tooltips.
 
