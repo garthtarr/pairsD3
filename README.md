@@ -6,7 +6,7 @@ This is a port of Mike Bostock's [D3 scatter plot matrix](http://bl.ocks.org/mbo
 
 You could also consider the [pairedVis()](https://healthvis.wordpress.com/2013/04/05/pairedvis/) function in the [healthvis](https://healthvis.wordpress.com/) package.
 
-Take it for a test run [here](https://garthtarr.shinyapps.io/pairsD3-shiny/) (you can upload your own data).
+Take it for a test run [here](http://garthtarr.com/apps/pairsD3/) (you can upload your own data).
 
 ## Installation
 
