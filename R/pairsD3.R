@@ -78,7 +78,7 @@ pairsD3 <- function(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
         col[is.na(col)] = col[1:sum(is.na(col))] # repeat colours
       }
     } else if(theme=="bw"){
-      col=gray.colors(n.group,start=0,end=0.75)
+      col=grDevices::gray.colors(n.group,start=0,end=0.75)
     }
   }
   if(length(col)>n.group){
@@ -112,7 +112,7 @@ pairsD3 <- function(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
     x = xin,
     width = width,
     height = height,
-    htmlwidgets::sizingPolicy(padding = 0, browser.fill = TRUE),
+    sizingPolicy = htmlwidgets::sizingPolicy(padding = 0, browser.fill = TRUE),
     package = 'pairsD3'
   )
 }

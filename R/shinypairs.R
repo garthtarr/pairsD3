@@ -146,7 +146,7 @@ shinypairs = function(x, group=NULL, subset=NULL, labels = NULL){
 
       output$pD3 <- renderPairsD3({
         pairsD3(x[,choices()],group=groupvar(), subset=subset, labels = labels,
-                theme = input$theme,big=TRUE,
+                theme = input$theme, big=TRUE,
                 opacity = input$opacity,
                 cex = input$cex)
       })
