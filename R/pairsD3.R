@@ -38,9 +38,9 @@
 #' }
 #'
 #' @export
-pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
-                    width = NULL, col=NULL, big=FALSE, theme="colour", opacity = 0.9,
-                    tooltip = NULL,leftmar = 35,topmar=2) {
+pairsD3 <- function(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
+                    width = NULL, col = NULL, big = FALSE, theme = "colour", opacity = 0.9,
+                    tooltip = NULL,leftmar = 35,topmar = 2) {
   height=width
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
@@ -124,7 +124,7 @@ pairsD3 <- function(x, group=NULL, subset=NULL, labels = NULL, cex = 3,
 #' @param height height default '400px'
 #'
 #' @export
-pairsD3Output <- function(outputId, width = '100%', height = '100%'){
+pairsD3Output <- function(outputId, width = '100%', height = '400px'){
   shinyWidgetOutput(outputId, 'pairsD3', width, height, package = 'pairsD3')
 }
 
