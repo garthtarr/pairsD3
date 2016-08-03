@@ -9,7 +9,12 @@ HTMLWidgets.widget({
     // save params for reference from resize method
     instance.xin = xin;
     // draw the graphic
-    this.drawGraphic(el, xin, el.offsetWidth, el.offsetHeight);
+    this.drawGraphic(
+      el,
+      xin,
+      el.getBoundingClientRect().width,
+      el.getBoundingClientRect().height
+    );
 
 
   },
@@ -70,8 +75,8 @@ HTMLWidgets.widget({
           .style("opacity", 0);
 
     svg = d3.select(el).append("svg")
-          .attr("width", size * p + padding*2)
-          .attr("height", size * p + padding*2)
+          .attr("width", size * p + padding*2 + xin.leftmar)
+          .attr("height", size * p + padding*2 + xin.topmar)
           .append("g")
           .attr("transform", "translate(" + xin.leftmar + "," + xin.topmar + ")");
 
