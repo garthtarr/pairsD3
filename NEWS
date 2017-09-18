@@ -1,3 +1,9 @@
+Version 0.1.2
+-------------
+
+* Added option for main diagonal
+* Initialised the documentation page with pkgdown
+
 Version 0.1.1
 -------------
 

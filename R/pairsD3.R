@@ -27,6 +27,8 @@
 #'   hovering over an observation. You can include basic html.
 #' @param leftmar space on the left margin
 #' @param topmar space on the bottom margin
+#' @param diag logical, whether or not the main diagonal is plotted
+#'   (scatter plot of variables against themselves).
 #'
 #' @import htmlwidgets
 #'
@@ -40,7 +42,8 @@
 #' @export
 pairsD3 <- function(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
                     width = NULL, col = NULL, big = FALSE, theme = "colour", opacity = 0.9,
-                    tooltip = NULL,leftmar = 35,topmar = 2) {
+                    tooltip = NULL, leftmar = 35, topmar = 2,
+                    diag = FALSE) {
   height=width
   # ensure the data is a numeric matrix but also an array
   data = data.frame(data.matrix(x))
@@ -92,7 +95,8 @@ pairsD3 <- function(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
     height = height,
     col = col,
     cex = cex,
-    opacity = opacity
+    opacity = opacity,
+    diag = diag
   )
   # pass the data and settings using 'xin'
   xin <- list(

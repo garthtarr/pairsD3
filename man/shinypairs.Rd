@@ -31,4 +31,3 @@ shinypairs(iris)
 }
 
 }
-

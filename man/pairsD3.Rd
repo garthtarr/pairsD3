@@ -6,7 +6,8 @@
 \usage{
 pairsD3(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
   width = NULL, col = NULL, big = FALSE, theme = "colour",
-  opacity = 0.9, tooltip = NULL, leftmar = 35, topmar = 2)
+  opacity = 0.9, tooltip = NULL, leftmar = 35, topmar = 2,
+  diag = FALSE)
 }
 \arguments{
 \item{x}{the coordinates of points given as numeric columns of a
@@ -46,6 +47,9 @@ hovering over an observation. You can include basic html.}
 \item{leftmar}{space on the left margin}
 
 \item{topmar}{space on the bottom margin}
+
+\item{diag}{logical, whether or not the main diagonal is plotted
+(scatter plot of variables against themselves).}
 }
 \description{
 An interactive matrix of scatterplots is produced.
@@ -58,4 +62,3 @@ pairsD3(iris[,1:4],group=iris[,5],
 }
 
 }
-
