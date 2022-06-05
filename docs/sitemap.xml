@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pairsD3.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pairsD3Output.html</loc>
+  </url>
+  <url>
+    <loc>/reference/renderPairsD3.html</loc>
+  </url>
+  <url>
+    <loc>/reference/savePairs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/shinypairs.html</loc>
+  </url>
+</urlset>

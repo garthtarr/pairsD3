@@ -143,3 +143,8 @@ renderPairsD3 <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, pairsD3Output, env, quoted = TRUE)
 }
+
+
+#' @importFrom grDevices gray.colors
+NULL
+

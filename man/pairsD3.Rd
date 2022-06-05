@@ -4,10 +4,22 @@
 \alias{pairsD3}
 \title{D3 scatterplot matrices}
 \usage{
-pairsD3(x, group = NULL, subset = NULL, labels = NULL, cex = 3,
-  width = NULL, col = NULL, big = FALSE, theme = "colour",
-  opacity = 0.9, tooltip = NULL, leftmar = 35, topmar = 2,
-  diag = FALSE)
+pairsD3(
+  x,
+  group = NULL,
+  subset = NULL,
+  labels = NULL,
+  cex = 3,
+  width = NULL,
+  col = NULL,
+  big = FALSE,
+  theme = "colour",
+  opacity = 0.9,
+  tooltip = NULL,
+  leftmar = 35,
+  topmar = 2,
+  diag = FALSE
+)
 }
 \arguments{
 \item{x}{the coordinates of points given as numeric columns of a
