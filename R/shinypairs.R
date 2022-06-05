@@ -54,14 +54,6 @@ shinypairs = function(x, group=NULL, subset=NULL, labels = NULL){
                  br(),br(),
                  strong("Recreate using this code:"),
                  verbatimTextOutput("code")
-               ),
-               wellPanel(
-                 icon("warning"),
-                 tags$small("The pairsD3 package is under active development."),
-                 tags$small("Report issues here: "),
-                 HTML(paste("<a href=http://github.com/garthtarr/pairsD3/issues>")),
-                 icon("github"),
-                 HTML(paste("</a>"))
                )
         ),
         column(9,
